@@ -77,9 +77,14 @@ null_stmt  ::= SEMI ;
 
 /* RESOLVIDO: Expressões Matemáticas, Relacionais e identificadores */
 expr ::= expr ADD_OP expr
+<<<<<<< HEAD:fase03-o-problema-da-ordem/src/main/cup/Parser.cup
        | expr MUL_OP expr
        | expr REL_OP expr
        | LPAREN expr RPAREN
        | NUMBER
        | ID
        ;
+=======
+       /* Adicione MUL_OP, REL_OP, parenteses, NUMBER e ID */
+       ;
+>>>>>>> 23221096919fe05e3d65f48b39afdfe3e4d64aa4:fase03-o-problema-da-ordem/src/main/cup/parser.cup

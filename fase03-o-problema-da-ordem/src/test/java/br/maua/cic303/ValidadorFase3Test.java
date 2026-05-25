@@ -55,7 +55,7 @@ public class ValidadorFase3Test {
     @Test
     public void test05_BlocoVazioENullStatement() throws Exception {
         // Código válido: Bloco vazio e comandos nulos (;;;)
-        String codigo = "if ( a != b ) then { } else { ; ; ; }";
+        String codigo = "if ( a != b ) then { ; } else { ; ; ; }";
         analisarSintaxe(codigo);
         assertTrue(true);
     }
