@@ -1,4 +1,4 @@
-package br.maua.cic303;
+ackage br.maua.cic303;
 
 import java_cup.runtime.*;
 
@@ -11,7 +11,6 @@ parser code {:
 
 /* ========================================================================= */
 /* DECLARAÇÃO DOS TOKENS (TERMINAIS)                                         */
-/* O CUP usará isso para gerar o sym.java que o seu Lexer precisa            */
 /* ========================================================================= */
 
 terminal IF, THEN, ELSE, WHILE;
@@ -31,10 +30,11 @@ non terminal expr;
 /* PRECEDÊNCIA E ASSOCIATIVIDADE                                             */
 /* ========================================================================= */
 
-/* RESOLVIDO: O operador mais embaixo tem a MAIOR precedência! */
-precedence left REL_OP;  // Menor precedência
-precedence left ADD_OP;  // Precedência média (+, -)
-precedence left MUL_OP;  // Maior precedência (*, /, %)
+precedence left REL_OP;
+precedence left ADD_OP;
+precedence left MUL_OP;
+precedence nonassoc THEN;
+precedence nonassoc ELSE;
 
 /* ========================================================================= */
 /* REGRAS DA GRAMÁTICA                                                       */
@@ -42,15 +42,12 @@ precedence left MUL_OP;  // Maior precedência (*, /, %)
 
 start with program;
 
-/* RESOLVIDO: Um programa é uma lista de comandos */
 program ::= stmt_list ;
 
-/* RESOLVIDO: Lista recursiva à esquerda (permite lista vazia ou múltiplos comandos) */
-stmt_list ::= stmt_list stmt 
-            | /* vazio */ 
+stmt_list ::= stmt_list stmt
+            | stmt
             ;
 
-/* RESOLVIDO: Definição de comando unificado */
 stmt ::= assign_stmt
        | if_stmt
        | while_stmt
@@ -58,33 +55,24 @@ stmt ::= assign_stmt
        | null_stmt
        ;
 
-/* Atribuição: ID = expressao ; */
 assign_stmt ::= ID ASSIGN expr SEMI ;
 
-/* RESOLVIDO: Estrutura If: if ( expressao ) then bloco [else bloco] */
-/* Note que a especificação exige a palavra 'THEN' e obriga o uso de 'BLOCO' (block_stmt) */
-if_stmt    ::= IF LPAREN expr RPAREN THEN block_stmt
-             | IF LPAREN expr RPAREN THEN block_stmt ELSE block_stmt ;
+if_stmt ::= IF LPAREN expr RPAREN THEN stmt
+          | IF LPAREN expr RPAREN THEN stmt ELSE stmt
+          ;
 
-/* RESOLVIDO: Estrutura While: while ( expressao ) bloco */
-while_stmt ::= WHILE LPAREN expr RPAREN block_stmt ;
+while_stmt ::= WHILE LPAREN expr RPAREN stmt ;
 
-/* Bloco: { lista_de_comandos } */
-block_stmt ::= LBRACE stmt_list RBRACE ;
+block_stmt ::= LBRACE stmt_list RBRACE 
+             | LBRACE RBRACE
+             ;
 
-/* Comando nulo: ; */
-null_stmt  ::= SEMI ;
+null_stmt ::= SEMI ;
 
-/* RESOLVIDO: Expressões Matemáticas, Relacionais e identificadores */
 expr ::= expr ADD_OP expr
-<<<<<<< HEAD:fase03-o-problema-da-ordem/src/main/cup/Parser.cup
        | expr MUL_OP expr
        | expr REL_OP expr
        | LPAREN expr RPAREN
        | NUMBER
        | ID
        ;
-=======
-       /* Adicione MUL_OP, REL_OP, parenteses, NUMBER e ID */
-       ;
->>>>>>> 23221096919fe05e3d65f48b39afdfe3e4d64aa4:fase03-o-problema-da-ordem/src/main/cup/parser.cup

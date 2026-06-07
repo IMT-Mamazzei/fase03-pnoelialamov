@@ -87,10 +87,5 @@ Identifier = {Letter}({Letter}|{Digit}|_)*
     .               { throw new RuntimeException("Erro Léxico: Caractere Ilegal -> " + yytext()); }
 }
 
-<<<<<<< HEAD
 /* Regra para o Final do Arquivo (Ajustado para retornar sym.EOF) */
 <<EOF>>             { return symbol(sym.EOF); }
-=======
-/* Regra para o Final do Arquivo */
-<<EOF>>             { return symbol(sym.EOF, ""); }
->>>>>>> 23221096919fe05e3d65f48b39afdfe3e4d64aa4
