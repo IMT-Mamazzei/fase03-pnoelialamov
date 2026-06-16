@@ -1,4 +1,4 @@
-ackage br.maua.cic303;
+package br.maua.cic303;
 
 import java_cup.runtime.*;
 

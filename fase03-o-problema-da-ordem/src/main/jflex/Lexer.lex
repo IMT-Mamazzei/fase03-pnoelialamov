@@ -1,13 +1,13 @@
 package br.maua.cic303;
 
-import java_cup.runtime.Symbol; // Importação necessária para o CUP
+import java_cup.runtime.Symbol;
 
 %%
 
 %class Lexer
 %public
 %unicode
-%cup       // <-- CRÍTICO: Esta diretiva ativa a integração com o CUP
+%cup
 %line
 %column
 
